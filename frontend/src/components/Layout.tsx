@@ -17,12 +17,12 @@ import {
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { to: '/', icon: LayoutGrid, label: 'Command Console' },
-  { to: '/telemetry', icon: Activity, label: 'Live Telemetry' },
-  { to: '/security', icon: ShieldCheck, label: 'Security Core' },
-  { to: '/fleet', icon: Globe, label: 'Fleet Network' },
-  { to: '/logs', icon: Terminal, label: 'Kernel Logs' },
-  { to: '/parameters', icon: Settings, label: 'Parameters' },
+  { to: '/dashboard', icon: LayoutGrid, label: 'Command Console' },
+  { to: '/dashboard/telemetry', icon: Activity, label: 'Live Telemetry' },
+  { to: '/dashboard/security', icon: ShieldCheck, label: 'Security Core' },
+  { to: '/dashboard/fleet', icon: Globe, label: 'Fleet Network' },
+  { to: '/dashboard/logs', icon: Terminal, label: 'Kernel Logs' },
+  { to: '/dashboard/parameters', icon: Settings, label: 'Parameters' },
 ];
 
 export function Layout() {
@@ -62,7 +62,7 @@ export function Layout() {
     <div className="flex h-screen overflow-hidden bg-[#0b1320] text-[#e2e8f0]">
       {/* Sidebar */}
       <aside className="w-16 lg:w-64 bg-[#0d1624] border-r border-white/5 flex flex-col items-center lg:items-stretch">
-        <Link to="/login" className="p-6 flex items-center gap-3 hover:bg-white/5 transition-colors">
+        <Link to="/dashboard" className="p-6 flex items-center gap-3 hover:bg-white/5 transition-colors">
           <div className="w-8 h-8 bg-[#4fa3d1] rounded flex items-center justify-center text-white shrink-0">
             <ShieldCheck size={20} />
           </div>

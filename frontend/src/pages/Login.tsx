@@ -14,7 +14,7 @@ export function Login() {
 
   const handleDemo = () => {
     enterDemoMode();
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -24,7 +24,7 @@ export function Login() {
 
     const success = await login(email, password);
     if (success) {
-      navigate('/');
+      navigate('/dashboard');
     } else {
       setError('Invalid credentials');
     }
