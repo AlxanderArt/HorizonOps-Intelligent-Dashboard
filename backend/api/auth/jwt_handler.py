@@ -6,8 +6,8 @@ Handles token creation, validation, and user authentication
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel
+import hashlib
 import os
 
 # Configuration
@@ -15,8 +15,15 @@ SECRET_KEY = os.getenv("JWT_SECRET_KEY", "horizonops-secret-key-change-in-produc
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def get_password_hash(password: str) -> str:
+    """Hash password using SHA256 (use bcrypt in production)."""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify password against hash."""
+    return get_password_hash(plain_password) == hashed_password
 
 
 class Token(BaseModel):
@@ -49,7 +56,7 @@ USERS_DB = {
         "email": "admin@horizonops.io",
         "full_name": "System Administrator",
         "role": "admin",
-        "hashed_password": pwd_context.hash("admin123"),
+        "hashed_password": get_password_hash("admin123"),
         "disabled": False,
     },
     "operator": {
@@ -57,7 +64,7 @@ USERS_DB = {
         "email": "operator@horizonops.io",
         "full_name": "Machine Operator",
         "role": "operator",
-        "hashed_password": pwd_context.hash("operator123"),
+        "hashed_password": get_password_hash("operator123"),
         "disabled": False,
     },
     "viewer": {
@@ -65,20 +72,10 @@ USERS_DB = {
         "email": "viewer@horizonops.io",
         "full_name": "Dashboard Viewer",
         "role": "viewer",
-        "hashed_password": pwd_context.hash("viewer123"),
+        "hashed_password": get_password_hash("viewer123"),
         "disabled": False,
     },
 }
-
-
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a password against its hash."""
-    return pwd_context.verify(plain_password, hashed_password)
-
-
-def get_password_hash(password: str) -> str:
-    """Hash a password."""
-    return pwd_context.hash(password)
 
 
 def get_user(username: str) -> Optional[UserInDB]:
