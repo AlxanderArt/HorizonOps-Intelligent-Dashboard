@@ -331,7 +331,6 @@ LOG_LEVEL=INFO
 
 # frontend/.env.local
 VITE_API_URL=http://localhost:8000
-GEMINI_API_KEY=your_api_key_here
 ```
 
 ---
