@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Shield, Zap, Eye, Play, User, Lock, ArrowRight, Sparkles } from 'lucide-react';
+import { Shield, Play, User, Lock, ArrowRight, Sparkles } from 'lucide-react';
 
 export function Login() {
   const navigate = useNavigate();
-  const { login, enterDemoMode, enterGuestMode } = useAuth();
+  const { login, enterDemoMode } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,11 +14,6 @@ export function Login() {
 
   const handleDemo = () => {
     enterDemoMode();
-    navigate('/');
-  };
-
-  const handleGuest = () => {
-    enterGuestMode();
     navigate('/');
   };
 
@@ -38,7 +33,7 @@ export function Login() {
 
   return (
     <div className="min-h-screen bg-[#0a0f1a] flex items-center justify-center p-8">
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -51,48 +46,26 @@ export function Login() {
         </div>
 
         {!showLogin ? (
-          /* Main Options */
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          /* Main Options - Demo and Sign In */
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {/* Demo Mode Card */}
             <button
               onClick={handleDemo}
               className="group bg-gradient-to-br from-[#4fa3d1]/20 to-[#4fa3d1]/5 border border-[#4fa3d1]/30 rounded-xl p-8 text-left hover:border-[#4fa3d1]/60 hover:from-[#4fa3d1]/30 hover:to-[#4fa3d1]/10 transition-all duration-300"
             >
-              <div className="w-14 h-14 bg-[#4fa3d1]/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Play className="w-7 h-7 text-[#4fa3d1]" />
+              <div className="w-16 h-16 bg-[#4fa3d1]/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Play className="w-8 h-8 text-[#4fa3d1]" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Demo Mode</h3>
-              <p className="text-slate-400 text-sm mb-4">
-                Explore the full platform with simulated aerospace manufacturing data
+              <h3 className="text-2xl font-bold text-white mb-3">Demo Mode</h3>
+              <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                Explore the full platform with simulated aerospace manufacturing data. Perfect for seeing all features in action.
               </p>
-              <div className="flex items-center gap-2 text-[#4fa3d1] text-sm font-semibold">
+              <div className="flex items-center gap-2 text-[#4fa3d1] text-sm font-semibold mb-4">
                 <Sparkles className="w-4 h-4" />
-                <span>Best for recruiters</span>
+                <span>Recommended for recruiters & reviewers</span>
               </div>
-              <div className="flex items-center gap-2 mt-4 text-[#4fa3d1] opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-sm">Launch Demo</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </button>
-
-            {/* Guest Mode Card */}
-            <button
-              onClick={handleGuest}
-              className="group bg-white/5 border border-white/10 rounded-xl p-8 text-left hover:border-white/20 hover:bg-white/10 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-white/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Eye className="w-7 h-7 text-slate-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Guest Access</h3>
-              <p className="text-slate-400 text-sm mb-4">
-                Browse the interface with temporary session data
-              </p>
-              <div className="flex items-center gap-2 text-slate-500 text-sm">
-                <Zap className="w-4 h-4" />
-                <span>No account required</span>
-              </div>
-              <div className="flex items-center gap-2 mt-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-sm">Continue as Guest</span>
+              <div className="flex items-center gap-2 text-[#4fa3d1] opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-sm font-medium">Launch Demo</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </button>
@@ -102,19 +75,19 @@ export function Login() {
               onClick={() => setShowLogin(true)}
               className="group bg-[#3FB950]/10 border border-[#3FB950]/30 rounded-xl p-8 text-left hover:border-[#3FB950]/60 hover:bg-[#3FB950]/20 transition-all duration-300"
             >
-              <div className="w-14 h-14 bg-[#3FB950]/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Lock className="w-7 h-7 text-[#3FB950]" />
+              <div className="w-16 h-16 bg-[#3FB950]/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Lock className="w-8 h-8 text-[#3FB950]" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Sign In</h3>
-              <p className="text-slate-400 text-sm mb-4">
-                Access your personalized dashboard with saved preferences
+              <h3 className="text-2xl font-bold text-white mb-3">Sign In</h3>
+              <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                Access your personalized dashboard with saved preferences, custom alerts, and real operational data.
               </p>
-              <div className="flex items-center gap-2 text-[#3FB950]/80 text-sm">
+              <div className="flex items-center gap-2 text-[#3FB950]/80 text-sm font-semibold mb-4">
                 <User className="w-4 h-4" />
-                <span>For registered users</span>
+                <span>For registered operators</span>
               </div>
-              <div className="flex items-center gap-2 mt-4 text-[#3FB950] opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-sm">Sign In</span>
+              <div className="flex items-center gap-2 text-[#3FB950] opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-sm font-medium">Sign In</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </button>
@@ -163,20 +136,21 @@ export function Login() {
                 </button>
               </form>
 
-              <div className="mt-6 pt-6 border-t border-white/10">
+              <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
                 <button
                   onClick={() => setShowLogin(false)}
-                  className="w-full text-slate-400 hover:text-white text-sm transition-colors"
+                  className="text-slate-400 hover:text-white text-sm transition-colors"
                 >
                   Back to options
                 </button>
+                <button
+                  onClick={handleDemo}
+                  className="text-[#4fa3d1] hover:underline text-sm"
+                >
+                  Try Demo Instead
+                </button>
               </div>
 
-              <div className="mt-4 p-4 bg-[#4fa3d1]/10 border border-[#4fa3d1]/20 rounded-lg">
-                <p className="text-[#4fa3d1] text-xs font-medium mb-2">Test Credentials:</p>
-                <p className="text-slate-400 text-xs">Email: admin@horizonops.io</p>
-                <p className="text-slate-400 text-xs">Password: admin123</p>
-              </div>
             </div>
           </div>
         )}

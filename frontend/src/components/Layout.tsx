@@ -13,7 +13,6 @@ import {
   Clock,
   Bell,
   Play,
-  Eye,
   User
 } from 'lucide-react';
 
@@ -28,7 +27,7 @@ const NAV_ITEMS = [
 
 export function Layout() {
   const navigate = useNavigate();
-  const { mode, user, isDemo, isGuest, logout } = useAuth();
+  const { mode, user, isDemo, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -44,16 +43,6 @@ export function Layout() {
         borderColor: 'border-[#4fa3d1]/30',
         textColor: 'text-[#4fa3d1]',
         description: 'Viewing simulated data'
-      };
-    }
-    if (isGuest) {
-      return {
-        label: 'GUEST',
-        icon: Eye,
-        bgColor: 'bg-white/10',
-        borderColor: 'border-white/20',
-        textColor: 'text-slate-400',
-        description: 'Temporary session'
       };
     }
     return {
@@ -117,18 +106,16 @@ export function Layout() {
             <div className="w-8 h-8 rounded-full bg-slate-700 overflow-hidden flex items-center justify-center">
               {isDemo ? (
                 <Play size={16} className="text-[#4fa3d1]" />
-              ) : isGuest ? (
-                <Eye size={16} className="text-slate-400" />
               ) : (
-                <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.email || 'guest'}`} alt="User" />
+                <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.email || 'user'}`} alt="User" />
               )}
             </div>
             <div className="hidden lg:block">
               <p className="text-xs font-bold text-white leading-none">
-                {user?.name || 'Guest User'}
+                {user?.name || 'User'}
               </p>
               <p className="text-[10px] text-slate-500 font-medium">
-                {isDemo ? 'Demo Mode' : isGuest ? 'Guest Session' : user?.role || 'User'}
+                {isDemo ? 'Demo Mode' : user?.role || 'Operator'}
               </p>
             </div>
             <LogOut size={14} className="ml-auto hidden lg:block text-slate-600" />
@@ -184,24 +171,6 @@ export function Layout() {
               className="text-[#4fa3d1] text-xs hover:underline"
             >
               Exit Demo
-            </button>
-          </div>
-        )}
-
-        {/* Guest Mode Banner */}
-        {isGuest && (
-          <div className="bg-yellow-500/10 border-b border-yellow-500/20 px-8 py-2 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Eye size={14} className="text-yellow-500" />
-              <span className="text-yellow-500 text-xs font-medium">
-                Guest Mode: Data will not be saved permanently
-              </span>
-            </div>
-            <button
-              onClick={() => navigate('/login')}
-              className="text-yellow-500 text-xs hover:underline"
-            >
-              Sign In to Save
             </button>
           </div>
         )}
