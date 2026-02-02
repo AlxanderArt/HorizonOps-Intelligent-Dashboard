@@ -1,0 +1,5 @@
+{
+  "description": "HorizonOps Command Console: A mission-control style predictive intelligence dashboard for aerospace manufacturing, featuring real-time telemetry, AI root-cause analysis, and high-fidelity operational monitoring.",
+  "requestFramePermissions": [],
+  "name": "HorizonOps Command Console"
+}

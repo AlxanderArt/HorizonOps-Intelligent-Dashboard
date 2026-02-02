@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HorizonOps Command Console | Tactical Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #0b1320;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        color: #e2e8f0;
+      }
+      .mono {
+        font-family: 'IBM Plex Mono', monospace;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b1320;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2d3748;
+        border-radius: 3px;
+      }
+      .grid-overlay {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+        background-size: 24px 24px;
+      }
+      .command-card {
+        background: #151d29;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .sidebar-item-active {
+        background: #1f2a44;
+        border-left: 3px solid #4fa3d1;
+      }
+      .status-pulse-red {
+        box-shadow: 0 0 0 0 rgba(214, 69, 69, 0.7);
+        animation: pulse-red 2s infinite;
+      }
+      @keyframes pulse-red {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 69, 69, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(214, 69, 69, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 69, 69, 0); }
+      }
+    </style>
+</head>
+<body class="grid-overlay">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>
