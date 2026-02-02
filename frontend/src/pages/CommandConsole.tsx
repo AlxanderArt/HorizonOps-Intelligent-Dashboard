@@ -20,9 +20,9 @@ import {
   Pie,
   Cell
 } from 'recharts';
+import { API_BASE } from '../config';
 
 const MACHINE_ID = "CNC-ALPHA-921";
-const API_BASE = "http://localhost:8000/api/v1";
 
 type TelemetryPoint = {
   time: string;

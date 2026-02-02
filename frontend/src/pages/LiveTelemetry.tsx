@@ -11,8 +11,7 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-
-const API_BASE = "http://localhost:8000/api/v1";
+import { API_BASE } from '../config';
 
 const MACHINES = [
   "CNC-ALPHA-921",

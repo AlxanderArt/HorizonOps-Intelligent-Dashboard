@@ -11,6 +11,7 @@ from typing import Optional, List
 from datetime import datetime
 import logging
 import json
+import os
 
 from .routes import predictions, telemetry, feedback, health, auth
 
@@ -27,10 +28,21 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# CORS Configuration
+# CORS Configuration - Allow configurable origins via environment variable
+cors_origins_env = os.getenv("CORS_ORIGINS", "")
+cors_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+
+# Default origins for development + any configured production origins
+default_origins = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:5173",
+]
+all_origins = default_origins + cors_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:5173", "*"],
+    allow_origins=all_origins if cors_origins else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
